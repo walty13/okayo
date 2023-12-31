@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeLeaf.org">
+<head>
+    <title>Products Management Service</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script th:inline="javascript">
+        var dictP = {};
+        var product_table = [];
+        // Set dictP[product.id] to 0 for each product
+        var prods = /*[[${products}]]*/ [];
+        for (var i = 0; i < prods.length; i++) {
+            dictP[prods[i].id] = 0;
+        }
+        console.log(dictP);
+
+        function add(id) {
+            console.log(dictP[id]);
+            dictP[id] += 1;
+            console.log(dictP[id]);
+        }
+
+        function remove(id) {
+            console.log(dictP[id]);
+            dictP[id] -= 1;
+            console.log(dictP[id]);
+        }
+    </script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Factures Management Service</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/products">Catalogue <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/clients">Clients</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/factures">Factures</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Product Id</th>
+                <th>Designation</th>
+                <th>PuHT</th>
+                <th>TVA</th>
+                <th>Actions</th> 
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="product : ${products}">
+                <td th:text="${product.id}"></td>
+                <td th:text="${product.designation}"></td>
+                <td th:text="${product.pu_ht}"></td>
+                <td th:text="${product.tva.valeur}"></td>
+                <td>
+                    <a th:href="@{/products/add/{id}(id=${product.id}, ref='2023-0001')}" class="btn btn-primary">Add</a>
+                    <a th:href="@{/products/{id}(id=${product.id}, ref='2023-0001')}" class="btn btn-danger">Remove</a>
+                </td> 
+            </tr>
+        </tbody>
+    </table>
+    <div style="padding: 10px; margin-left: 50px;">
+        <a th:href="@{/products/submit/{ref}(ref='2023-0001', code_client=C1)}" class="btn btn-primary">Submit</a>
+    </div>
+</body>
+</html>

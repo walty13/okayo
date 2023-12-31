@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeLeaf.org">
+<head>
+    <title>Clients Management Service</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Factures Management Service</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/products}">Catalogue</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/clients}">Clients <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/factures}">Factures</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Client Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="client : ${clients}">
+                <td th:text="${client.code_client}"></td>
+                <td th:text="${client.nom}"></td>
+                <td th:text="${client.email}"></td>
+                <td th:text="${client.telephone}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

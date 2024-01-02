@@ -13,13 +13,17 @@ catalogue. Il est possible que celle-ci doive évoluer à une date précise ou p
 
 ## Base de données ##
 J'ai choisi de créer ma base de données selon le schéma relationnel suivant :
+
 ![Diagramme BDD](img/DiagrammeBDD.png)
 
+
 Les associations entre les différentes tables sont modélisés sous forme de tables contenant les clés étrangères des deux entités associées. Cela donne la base de données suivante :
+
 ![Schèma de la BDD](img/diagrammephp.png)
 
-La table Client permet de stocker les informations de chaque client. Un client peut avoir 0 à n factures et chaque facture est associé à un unique client. 
-Une facture est caractérisée par sa référence, ses dates d'écheance et de réalisation, son prix total en HT et en TTC. Les prix totals en TH et TTC sont calculés en sommant les prix HT et TTC de chaque ligne.
+
+La table Client permet de stocker les informations de chaque client. Un client peut avoir 0 à n factures et chaque facture est associé à un unique client.
+Une facture est caractérisée par sa référence, ses dates d'écheance et de réalisation, son prix total en HT et en TTC. Les prix totaux en TH et TTC sont calculés en sommant les prix HT et TTC de chaque ligne.
 Une ligne correspond à un produit commandé par le client, elle contient sa désignation, son prix unitaire HT, sa quantité, le taux de tva affecté au produit au moment de l'achat et la référence de la facture. Chaque ligne est associé à une unique facture et chaque facture contient 1 à n lignes.
 Chaque produit est caractérisé par sa désignation, son prix unitaire HT et la TVA qui lui est associée. Chaque TVA est caractérisé par sa valeur et ses dates de début et fin de validité. Un produit se voit associé une unique TVA et chaque TVA peut être attribuée à 0 à n produits.
 
